@@ -15,3 +15,7 @@ An expense tracking application built with Angular. Easily manage your daily exp
 - [Angular](https://angular.io/)
 - [Bootstrap 5](https://getbootstrap.com/) for responsive UI
 - [Chart.js](https://www.chartjs.org/) for interactive charts
+
+## Back-End
+
+Back-end built with Node.js, Express.js, MongoDB, and Passport.js for authentication: https://github.com/LeoSmotryk/expense-tracking-app_back-end
