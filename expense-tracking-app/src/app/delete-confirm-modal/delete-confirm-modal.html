@@ -1,0 +1,15 @@
+<div class="modal-backdrop">>
+  <div class="expense-modal">
+    <h2 style="text-align:center; margin-bottom: 10px;">Delete Expense</h2>
+    <form (submit)="confirmDelete(); $event.preventDefault()" style="display:flex; flex-direction:column;">
+      <div style="text-align:center;">
+        <p>Are you sure you want to delete<br>
+          <b>{{ expense?.title }}</b>?
+        </p>
+      </div>
+      <button type="submit" style="background:#d32f2f; transition:background 0.2s; margin-top: 0px;"
+        onmouseover="this.style.background='#b71c1c'" onmouseout="this.style.background='#d32f2f'">Delete</button>
+      <button type="button" (click)="close.emit()">Cancel</button>
+    </form>
+  </div>
+</div>

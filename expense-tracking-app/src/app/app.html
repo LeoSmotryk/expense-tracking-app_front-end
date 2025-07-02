@@ -1,0 +1,25 @@
+@if (!showExpensesModal && !showReportModal) {
+<main class="main">
+  <h1>Expense Tracking App</h1>
+  <h2>Your personal finance tracker</h2>
+  <button class="start" (click)="openAuthModal()">Start</button>
+</main>
+}
+@if (showAuthModal) {
+<app-auth-modal (close)="closeAuthModal()" (authSuccess)="openExpensesModal()"></app-auth-modal>
+}
+@if (showExpensesModal) {
+<app-expenses-modal (close)="closeExpensesModal()" (openReport)="openReportModal($event)"
+  (logout)="onLogout()"></app-expenses-modal>
+}
+@if (showReportModal) {
+<app-report-modal [expenses]="expenses" [types]="expenseTypes" (back)="closeReportModal()"
+  (logout)="onLogout()"></app-report-modal>
+}
+<button class="fullscreen-btn" (click)="toggleFullscreen()"
+  [title]="isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'">
+  <span class="material-icons">
+    {{ isFullscreen ? 'fullscreen_exit' : 'fullscreen' }}
+  </span>
+</button>
+<router-outlet />

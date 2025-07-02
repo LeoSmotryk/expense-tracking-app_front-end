@@ -1,0 +1,95 @@
+<div class="modal-backdrop">
+  <div class="form_container" [class.active]="!isLogin">
+    <button class="form_close" (click)="close.emit()" aria-label="Close">&times;</button>
+    @if (isLogin) {
+    <div class="form login_form">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <h2>Login</h2>
+
+        <div class="input_box">
+          <input type="email" placeholder="Enter your email" formControlName="email" required />
+          <i class="uil uil-envelope-alt email"></i>
+          @if (loginSubmitted && loginForm.get('email')?.invalid) {
+          <div class="error">
+            @if (loginForm.get('email')?.errors?.['required']) { Email is required. }
+            @if (loginForm.get('email')?.errors?.['email']) { Enter a valid email. }
+          </div>
+          }
+        </div>
+
+        <div class="input_box">
+          <input [type]="showLoginPassword ? 'text' : 'password'" placeholder="Enter your password"
+            formControlName="password" required />
+          <i class="uil uil-lock password"></i>
+          <i class="uil" [ngClass]="showLoginPassword ? 'uil-eye pw_hide' : 'uil-eye-slash pw_hide'"
+            (click)="showLoginPassword = !showLoginPassword">
+          </i>
+          @if (loginSubmitted && loginForm.get('password')?.invalid) {
+          <div class="error">Password is required.</div>
+          }
+        </div>
+
+        <button class="button" type="submit">Login Now</button>
+
+        <div class="login_signup">
+          Don't have an account?
+          <a href="#" (click)="isLogin = false; $event.preventDefault()" id="signup">Signup</a>
+        </div>
+      </form>
+    </div>
+    }
+    @else {
+    <div class="form signup_form">
+      <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+        <h2>Signup</h2>
+
+        <div class="input_box">
+          <input type="email" placeholder="Enter your email" formControlName="email" required />
+          <i class="uil uil-envelope-alt email"></i>
+          @if (signupSubmitted && signupForm.get('email')?.invalid) {
+          <div class="error">
+            @if (signupForm.get('email')?.errors?.['required']) { Email is required. }
+            @if (signupForm.get('email')?.errors?.['email']) { Enter a valid email. }
+          </div>
+          }
+        </div>
+
+        <div class="input_box">
+          <input [type]="showSignupPassword ? 'text' : 'password'" placeholder="Create password"
+            formControlName="password" required />
+          <i class="uil uil-lock password"></i>
+          <i class="uil" [ngClass]="showSignupPassword ? 'uil-eye pw_hide' : 'uil-eye-slash pw_hide'"
+            (click)="showSignupPassword = !showSignupPassword">
+          </i>
+          @if (signupSubmitted && signupForm.get('password')?.invalid) {
+          <div class="error">Password is required.</div>
+          }
+        </div>
+
+        <div class="input_box">
+          <input [type]="showSignupRepeatPassword ? 'text' : 'password'" placeholder="Confirm password"
+            formControlName="repeatPassword" required />
+          <i class="uil uil-lock password"></i>
+          <i class="uil" [ngClass]="showSignupRepeatPassword ? 'uil-eye pw_hide' : 'uil-eye-slash pw_hide'"
+            (click)="showSignupRepeatPassword = !showSignupRepeatPassword">
+          </i>
+          @if (signupSubmitted && signupForm.get('repeatPassword')?.invalid) {
+          <div class="error">Repeat password is required.</div>
+          }
+        </div>
+
+        <button class="button" type="submit">Signup Now</button>
+
+        <div class="login_signup">
+          Already have an account?
+          <a href="#" (click)="isLogin = true; $event.preventDefault()" id="login">Login</a>
+        </div>
+      </form>
+    </div>
+    }
+
+    @if (errorMsg) {
+    <div class="error">{{ errorMsg }}</div>
+    }
+  </div>
+</div>

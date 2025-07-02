@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.expenses_container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 80vh;
+  height: 80vh;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.header h2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  pointer-events: none;
+  font-size: 22px;
+  color: #0b0217;
+}
+
+.back-btn,
+.logout-btn {
+  color: #535353;
+  font-size: 16px;
+  opacity: 0.7;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.2s;
+  min-width: 50px;
+}
+
+.back-btn:hover,
+.logout-btn:hover {
+  color: #000;
+}
+
+.filters-row {
+  display: flex;
+  gap: 18px;
+  margin: 0.5rem 0;
+  justify-content: center;
+}
+
+.filters-row select {
+  padding: 0.2rem 1.2rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f7f7fa;
+  color: #000;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  min-width: 140px;
+  max-width: 200px;
+  cursor: pointer;
+  --select-dropdown-max-height: 240px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.filters-row select:hover {
+  border-color: #464646;
+  background: #e8e8e8;
+  color: #222;
+}
+
+.report-summary {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.report-chart {
+  min-height: 200px;
+  background: #f7f7fa;
+  border-radius: 8px;
+  padding: 16px;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.date-filter-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.3rem;
+}
+
+.form-control {
+  min-width: 100px;
+  max-width: 120px;
+  height: 1.6rem;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  color: #222;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
+
+.form-control:focus {
+  background: #e8e8e8;
+  border-color: #464646;
+}
+
+label[for="filterDate"] {
+  font-size: 1rem;
+  color: #222;
+  font-weight: 500;
+  margin-bottom: 0;
+  margin-right: 0.7rem;
+  letter-spacing: 0.01em;
+}
+
+.date-filter {
+  min-width: 140px;
+  max-width: 200px;
+  height: 2rem;
+  border: 1.5px solid #e0e0e0;
+  background: #f7f7fa;
+  color: #222;
+  transition: border-color 0.15s, background 0.15s;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.date-filter:hover {
+  border-color: #464646;
+  background: #e8e8e8;
+}

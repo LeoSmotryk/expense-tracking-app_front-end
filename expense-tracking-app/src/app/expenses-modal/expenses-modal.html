@@ -1,0 +1,103 @@
+<div class="modal-backdrop">
+  <div class="expenses_container">
+    <div class="header">
+      <button class="report-btn" (click)="openReportModal()" aria-label="Make report">
+        <i class="uil uil-chart-bar"></i> Make report
+      </button>
+      <h2>Your Expenses</h2>
+      <button class="logout-btn" (click)="logout.emit()" aria-label="Log out">
+        <i class="uil uil-signout"></i> Log out
+      </button>
+    </div>
+    <div class="mb-3 d-flex align-items-center gap-2 justify-content-center">
+      <div class="date-filter-group">
+        <button type="button" class="date-nav-btn" (click)="changeDate(-1)" aria-label="Previous day">
+          <i class="uil uil-angle-left"></i>
+        </button>
+        <div class="date-filter">
+          <input id="filterDate" matInput [matDatepicker]="picker" class="form-control" [value]="filterDate"
+            (dateChange)="onMaterialDateChange($event)" (focus)="picker.open()" readonly style="cursor: pointer;" />
+          <button mat-icon-button type="button" (click)="picker.open()" aria-label="Open calendar"
+            style="background: none; border: none;">
+            <mat-icon>calendar_today</mat-icon>
+          </button>
+          <mat-datepicker #picker [startAt]="selectedDate"></mat-datepicker>
+        </div>
+        <button type="button" class="date-nav-btn" (click)="changeDate(1)" aria-label="Next day">
+          <i class="uil uil-angle-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <app-add-expense-modal *ngIf="showAddModal" (close)="closeAddModal()" (expenseAdded)="handleExpenseAdded($event)"
+      [expenses]="expenses">
+    </app-add-expense-modal>
+
+    <app-edit-expense-modal *ngIf="showEditModal" [expense]="expenseToEdit" [expenses]="expenses"
+      (close)="closeEditModal()" (expenseEdited)="handleExpenseEdited($event)">
+    </app-edit-expense-modal>
+
+    <app-delete-confirm-modal *ngIf="showDeleteModal" [expense]="expenseToDelete" (close)="closeDeleteModal()"
+      (deleteConfirmed)="handleDeleteConfirmed()">
+    </app-delete-confirm-modal>
+
+    <div class="expenses-table-wrapper">
+      <table class="expenses-table" *ngIf="filteredExpenses.length > 0">
+        <thead>
+          <tr>
+            <th style="cursor:pointer; white-space:nowrap; width: 80px;" (click)="sortBy('createdAt')">
+              Time
+              <i class="uil ms-1" [ngClass]="{
+                   'uil-arrow-up': sortColumn === 'createdAt' && sortOrder === 'asc',
+                   'uil-arrow-down': sortColumn === 'createdAt' && sortOrder === 'desc',
+                   'uil-arrow-up text-muted': sortColumn !== 'createdAt'
+                 }"></i>
+            </th>
+            <th style="cursor:pointer; width: auto;" (click)="sortBy('title')">
+              Title
+              <i class="uil ms-1" [ngClass]="{
+                   'uil-arrow-up': sortColumn === 'title' && sortOrder === 'asc',
+                   'uil-arrow-down': sortColumn === 'title' && sortOrder === 'desc',
+                   'uil-arrow-up text-muted': sortColumn !== 'title'
+                 }"></i>
+            </th>
+            <th style="cursor:pointer; width: auto;" (click)="sortBy('type')">
+              Type
+              <i class="uil ms-1" [ngClass]="{
+                   'uil-arrow-up': sortColumn === 'type' && sortOrder === 'asc',
+                   'uil-arrow-down': sortColumn === 'type' && sortOrder === 'desc',
+                   'uil-arrow-up text-muted': sortColumn !== 'type'
+                 }"></i>
+            </th>
+            <th style="cursor:pointer; width: 110px;" (click)="sortBy('amount')">
+              Amount
+              <i class="uil ms-1" [ngClass]="{
+                   'uil-arrow-up': sortColumn === 'amount' && sortOrder === 'asc',
+                   'uil-arrow-down': sortColumn === 'amount' && sortOrder === 'desc',
+                   'uil-arrow-up text-muted': sortColumn !== 'amount'
+                 }"></i>
+            </th>
+            <th style="width: 60px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exp of filteredExpenses">
+            <td>{{ exp.createdAt | date:'HH:mm' }}</td>
+            <td>{{ exp.title }}</td>
+            <td>{{ exp.type }}</td>
+            <td>{{ exp.amount | number:'1.2-2' }}</td>
+            <td>
+              <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
+                <button class="icon-btn" (click)="openEditModal(exp)" title="Edit"><i class="uil uil-edit"></i></button>
+                <button class="icon-btn" (click)="openDeleteModal(exp)" title="Delete"><i
+                    class="uil uil-trash-alt"></i></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="filteredExpenses.length === 0">No expenses yet.</p>
+    </div>
+    <button class="add-btn" (click)="openAddModal()">Add</button>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="modal-backdrop">
+  <div class="expenses_container">
+    <div class="header">
+      <button class="back-btn" (click)="back.emit()" aria-label="Back">
+        <i class="uil uil-arrow-left"></i> Back
+      </button>
+      <h2>Report</h2>
+      <button class="logout-btn" (click)="logout.emit()" aria-label="Log out">
+        <i class="uil uil-signout"></i> Log out
+      </button>
+    </div>
+    <div class="filters-row">
+      <select [(ngModel)]="selectedPeriod" (change)="onPeriodChange(selectedPeriod)">
+        <option *ngFor="let p of periodOptions" [value]="p.value">{{ p.label }}</option>
+      </select>
+      <select [(ngModel)]="selectedType" (change)="onTypeChange(selectedType)">
+        <option value="all">All types</option>
+        <option *ngFor="let t of types" [value]="t">{{ t }}</option>
+      </select>
+    </div>
+    <div class="report-summary">
+      <h3>Expenses: {{ totalAmount | number:'1.2-2' }}</h3>
+    </div>
+    <div class="report-chart">
+      <canvas id="reportChart"></canvas>
+    </div>
+  </div>
+</div>
